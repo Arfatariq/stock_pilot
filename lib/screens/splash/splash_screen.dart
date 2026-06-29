@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:stock_pilot/authentication_screens/login_screen.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
-import 'package:stock_pilot/widgets/app_widget.dart';
+import 'package:stock_pilot/widgets/app_logo.dart';
 
-class SplashScreen extends StatelessWidget {
+
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        ),
+      );
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
