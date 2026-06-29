@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stock_pilot/authentication_screens/login_screen.dart';
-import 'package:stock_pilot/authentication_screens/signup_screen.dart';
+import 'package:stock_pilot/screens/auth_screens/login_screen.dart';
+import 'package:stock_pilot/screens/auth_screens/signup_screen.dart';
+import 'package:stock_pilot/screens/dashboard/dashboard_screen.dart';
+
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/widgets/app_logo.dart';
 
@@ -21,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) =>  SignupScreen(),
+          builder: (context) =>DashboardScreen(),
         ),
       );
     });

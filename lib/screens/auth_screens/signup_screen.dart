@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stock_pilot/screens/auth_screens/login_screen.dart';
+
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/widgets/top_bar.dart';
 
@@ -209,7 +211,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
                   const SizedBox(height: 28),
 
-                  // sign up button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -246,7 +247,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          // go back to login later
+                             Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>  LoginScreen(),
+      ),
+    );
                         },
                         child: const Text(
                           'Sign in',
