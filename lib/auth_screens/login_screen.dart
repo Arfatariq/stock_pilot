@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stock_pilot/auth_screens/forget_password.dart';
+import 'package:stock_pilot/auth_screens/signup_screen.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/widgets/top_bar.dart';
 
@@ -61,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
               
                   const Text(
                     'Email',
-                    style: TextStyle(fontSize: 13, color: Colors.black54),
+                    style: TextStyle(fontSize: 13, color: AppColors.primaryDark),
                   ),
                   const SizedBox(height: 6),
 
@@ -142,7 +144,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: () {
-                        
+                        Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ForgotPasswordScreen(),
+      ),
+    );
                       },
                       child: const Text(
                         'Forgot password?',
@@ -203,7 +210,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: OutlinedButton(
                       onPressed: () {
-                        
+                        Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SignupScreen(),
+      ),
+    );
                       },
                       style: OutlinedButton.styleFrom(
                         padding:
