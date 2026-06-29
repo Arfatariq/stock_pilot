@@ -51,8 +51,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(
                     'Sign in to continue',
                     style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey.shade500,
+                      fontSize: 15,
+                      color: AppColors.primaryMid
                     ),
                   ),
 
@@ -91,10 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 16),
 
-                  // password label
                   const Text(
                     'Password',
-                    style: TextStyle(fontSize: 13, color: Colors.black54),
+                    style: TextStyle(fontSize: 13, color:AppColors.primaryDark),
                   ),
                   const SizedBox(height: 6),
 
@@ -138,12 +137,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 10),
 
-                  // forgot password
+                
                   Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: () {
-                        // navigate to forgot password later
+                        
                       },
                       child: const Text(
                         'Forgot password?',
@@ -155,12 +154,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 24),
 
-                  // sign in button
+                
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // login logic later
+                        
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
@@ -182,8 +181,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
 
                   const SizedBox(height: 16),
-
-           
                   Row(
                     children: [
                       Expanded(child: Divider(color: Colors.grey.shade300)),
@@ -206,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: OutlinedButton(
                       onPressed: () {
-                        // navigate to signup later
+                        
                       },
                       style: OutlinedButton.styleFrom(
                         padding:
@@ -221,17 +218,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                             fontSize: 13, color: AppColors.primary),
                       ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 32),
-
-                  // terms text
-                  Center(
-                    child: Text(
-                      'By signing in you agree to our terms of use',
-                      style: TextStyle(
-                          fontSize: 11, color: Colors.grey.shade400),
                     ),
                   ),
 
