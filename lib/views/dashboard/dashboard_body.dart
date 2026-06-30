@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/widgets/item_card.dart';
 import 'package:stock_pilot/widgets/order_items.dart';
-import 'package:stock_pilot/widgets/product_cards.dart';
+import 'package:stock_pilot/widgets/product_stat_cards.dart';
 
 
 class DashboardBody extends StatelessWidget {
@@ -50,7 +50,7 @@ class DashboardBody extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: StatCard(
+                child: ProductStatCards(
                   label: 'Total products',
                   value: '142',
                   icon: Icons.inventory_2_outlined,
@@ -60,7 +60,7 @@ class DashboardBody extends StatelessWidget {
               ),
               const SizedBox(width: 12),
               Expanded(
-                child: StatCard(
+                child: ProductStatCards(
                   label: 'Suppliers',
                   value: '24',
                   icon: Icons.store_outlined,
@@ -77,7 +77,7 @@ class DashboardBody extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: StatCard(
+                child: ProductStatCards(
                   label: 'Open orders',
                   value: '7',
                   icon: Icons.shopping_cart_outlined,
@@ -87,7 +87,7 @@ class DashboardBody extends StatelessWidget {
               ),
               const SizedBox(width: 12),
               Expanded(
-                child: StatCard(
+                child: ProductStatCards(
                   label: 'Low stock',
                   value: '5',
                   icon: Icons.warning_amber_outlined,

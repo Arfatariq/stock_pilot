@@ -12,21 +12,18 @@ class SuppliersScreen extends StatelessWidget {
   final List<Map<String, dynamic>> suppliers = const [
     {
       'company': 'TechParts Ltd',
-   
-      'owner': 'Ali Hassan',
-      'phone': '0312-4567890',
-      'products': 38,
-    },
-    {
-   'company': 'TechParts Ltd',
-   
       'owner': 'Ali Hassan',
       'phone': '0312-4567890',
       'products': 38,
     },
     {
       'company': 'TechParts Ltd',
-  
+      'owner': 'Ali Hassan',
+      'phone': '0312-4567890',
+      'products': 38,
+    },
+    {
+      'company': 'TechParts Ltd',
       'owner': 'Ali Hassan',
       'phone': '0312-4567890',
       'products': 38,

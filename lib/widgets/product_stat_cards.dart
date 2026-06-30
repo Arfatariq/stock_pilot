@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 
-class StatCard extends StatelessWidget {
+class ProductStatCards extends StatelessWidget {
   final String label;
   final String value;
   final IconData icon;
   final Color iconColor;
   final Color bgColor;
 
-  const StatCard({
+  const ProductStatCards({
     super.key,
     required this.label,
     required this.value,

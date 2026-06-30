@@ -12,7 +12,7 @@ class ProductsScreen extends StatelessWidget {
 
   final List<Map<String, dynamic>> products = const [
     {
-      'name': 'USB-C Hub 7-in-1',
+      'name': 'USB-C ',
    
       'price': 'Rs. 2,400',
       'stock': 3,
@@ -24,13 +24,13 @@ class ProductsScreen extends StatelessWidget {
       'stock': 7,
     },
     {
-      'name': 'Mechanical Keyboard TKL',
+      'name': 'Mechanical Keyboard',
   
       'price': 'Rs. 5,200',
       'stock': 54,
     },
     {
-      'name': 'Monitor 24" FHD',
+      'name': 'Monitor ',
    
       'price': 'Rs. 28,000',
       'stock': 31,

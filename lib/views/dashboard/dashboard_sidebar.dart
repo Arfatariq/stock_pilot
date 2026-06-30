@@ -36,22 +36,8 @@ class DashboardSidebar extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: TopBar(),
-                    // child: const Icon(
-                    //   Icons.grid_view_rounded,
-                    //   size: 18,
-                    //   color: Colors.white,
-                    // ),
-                  ),
-                  // const SizedBox(width: 10),
-                  // const Text(
-                  //   'StockPilot',
-                  //   style: TextStyle(
-                  //     fontSize: 15,
-                  //     fontWeight: FontWeight.w500,
-                  //     color: Colors.white,
-                  //   ),
-                  // ),
-                ],
+                 
+               ) ],
               ),
             ),
 
