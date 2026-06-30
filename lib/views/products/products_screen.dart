@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/views/products/add_products_screen.dart';
 
+
 import 'package:stock_pilot/widgets/product_card.dart';
 
 import 'package:stock_pilot/widgets/search_bar.dart';
@@ -46,7 +47,7 @@ class ProductsScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddProductsScreen(),
+              builder: (context) => AddProductScreen(),
             ),
           );
         },
@@ -58,20 +59,18 @@ class ProductsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            // search bar
             const AppSearchBar(hint: 'Search products...'),
 
             const SizedBox(height: 14),
 
-            // product count
+           
             Text(
               '${products.length} products',
-              style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+              style: TextStyle(fontSize: 12, color: AppColors.primaryMid),
             ),
 
             const SizedBox(height: 10),
 
-            // products list
             Expanded(
               child: ListView.separated(
                 itemCount: products.length,
