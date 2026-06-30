@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 
-class OrderItem extends StatelessWidget {
+class OrderCards extends StatelessWidget {
   final String orderId;
   final String supplier;
   final String items;
@@ -11,7 +11,7 @@ class OrderItem extends StatelessWidget {
   final Color statusBg;
   final bool isLast;
 
-  const OrderItem({
+  const OrderCards({
     super.key,
     required this.orderId,
     required this.supplier,

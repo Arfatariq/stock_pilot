@@ -21,7 +21,7 @@ class ProductCard extends StatelessWidget {
       child: Row(
         children: [
 
-          // product image placeholder
+       
           Container(
             width: 50,
             height: 50,
@@ -38,7 +38,7 @@ class ProductCard extends StatelessWidget {
 
           const SizedBox(width: 12),
 
-          // product name, supplier, price
+      
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 
-class SupplierCard extends StatelessWidget {
+class SupplierInfoCard extends StatelessWidget {
   final Map<String, dynamic> supplier;
 
-  const SupplierCard({
+  const SupplierInfoCard({
     super.key,
     required this.supplier,
   });
@@ -20,8 +20,6 @@ class SupplierCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-
-  
 
        Expanded(
             child: Column(

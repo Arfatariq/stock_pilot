@@ -3,8 +3,9 @@ import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/views/supplier/add_supplier_screen.dart';
 
 import 'package:stock_pilot/widgets/search_bar.dart';
+import 'package:stock_pilot/widgets/supplier_info_card.dart';
 
-import 'package:stock_pilot/widgets/supplier_stat_card.dart';
+
 
 class SuppliersScreen extends StatelessWidget {
   const SuppliersScreen({super.key});
@@ -71,7 +72,7 @@ class SuppliersScreen extends StatelessWidget {
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 10),
                 itemBuilder: (context, index) {
-                  return SupplierCard(supplier: suppliers[index]);
+                  return SupplierInfoCard(supplier: suppliers[index]);
                 },
               ),
             ),

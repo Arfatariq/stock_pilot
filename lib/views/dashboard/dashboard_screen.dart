@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pilot/views/dashboard/dashboard_body.dart';
+import 'package:stock_pilot/views/orders/orders_history_screen.dart';
 import 'package:stock_pilot/views/products/products_screen.dart';
 import 'package:stock_pilot/views/supplier/supplier_screen.dart';
 import 'package:stock_pilot/widgets/dashboard_topbar.dart';
@@ -28,7 +29,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     DashboardBody(),
     ProductsScreen(),
     SuppliersScreen(),
-    Center(child: Text('Purchases coming soon', style: TextStyle(color: Colors.grey))),
+OrdersHistoryScreen(),
     Center(child: Text('Inventory coming soon', style: TextStyle(color: Colors.grey))),
   ];
 
