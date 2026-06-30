@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stock_pilot/screens/auth_screens/login_screen.dart';
-import 'package:stock_pilot/screens/auth_screens/signup_screen.dart';
+
 import 'package:stock_pilot/screens/dashboard/dashboard_screen.dart';
 
 import 'package:stock_pilot/theme/app_colors.dart';
@@ -21,6 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
           builder: (context) =>DashboardScreen(),
