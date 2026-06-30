@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_pilot/views/auth_screens/forget_password.dart';
 import 'package:stock_pilot/views/auth_screens/signup_screen.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
+import 'package:stock_pilot/views/dashboard/dashboard_screen.dart';
 import 'package:stock_pilot/widgets/top_bar.dart';
 
 
@@ -166,7 +167,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        
+                        Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SignupScreen(),
+      ),
+    );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
@@ -213,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const SignupScreen(),
+        builder: (context) => const DashboardScreen(),
       ),
     );
                       },

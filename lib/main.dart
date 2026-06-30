@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:stock_pilot/views/splash/splash_screen.dart';
 
 
-void main() {
+
+
+
+Future <void> main async() {
   runApp(const MyApp());
 }
 

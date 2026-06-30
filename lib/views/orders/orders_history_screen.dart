@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/views/orders/add_orders_screen.dart';
-import 'package:stock_pilot/views/products/add_products_screen.dart';
+
 
 
 import 'package:stock_pilot/widgets/product_card.dart';

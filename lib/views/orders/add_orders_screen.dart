@@ -36,7 +36,7 @@ class _AddProductScreenState extends State<AddOrdersScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
         title: const Text(
-          'Add Product',
+          'Add Orders',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
