@@ -13,7 +13,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final descriptioncontroller = TextEditingController();
   final pricecontroller = TextEditingController();
   final stockcontroller = TextEditingController();
-    final suppliercontroller = TextEditingController();
+  final suppliercontroller = TextEditingController();
 
   
 

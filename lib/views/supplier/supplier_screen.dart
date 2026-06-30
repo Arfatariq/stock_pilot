@@ -41,6 +41,12 @@ class SupplierScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(onPressed: (){
         Navigator.push(context, MaterialPageRoute(builder: (context) => const AddSupplierScreen()));
       }),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SearchBar(hintText: 'search supplier',)
+        ],
+      ),
     );
   }
 }
