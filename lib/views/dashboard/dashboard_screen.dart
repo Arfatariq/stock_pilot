@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stock_pilot/screens/dashboard/dashboard_body.dart';
-
+import 'package:stock_pilot/views/dashboard/dashboard_body.dart';
+import 'package:stock_pilot/views/products/products_screen.dart';
 import 'package:stock_pilot/widgets/dashboard_topbar.dart';
 import 'package:stock_pilot/widgets/side_drawer.dart';
-
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -13,9 +12,6 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  // this key lets us open/close the drawer from anywhere
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
   int selectedIndex = 0;
 
   final List<String> pageTitles = [
@@ -26,25 +22,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
     'Inventory',
   ];
 
-  // returns the right page based on selected sidebar item
-  Widget getPage() {
-    if (selectedIndex == 0) return const DashboardBody();
-
-    // other pages coming soon
-    return const Center(
-      child: Text(
-        'Coming soon',
-        style: TextStyle(color: Colors.grey),
-      ),
-    );
-  }
+  // list of all pages in the same order as pageTitles
+  final List<Widget> pages = const [
+    DashboardBody(),
+    ProductsScreen(),
+    Center(child: Text('Suppliers coming soon', style: TextStyle(color: Colors.grey))),
+    Center(child: Text('Purchases coming soon', style: TextStyle(color: Colors.grey))),
+    Center(child: Text('Inventory coming soon', style: TextStyle(color: Colors.grey))),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
-      // drawer opens when hamburger is tapped
-      drawer: AppSidebar(
+      drawer: AppSidedrawer(
         selectedIndex: selectedIndex,
         onItemTapped: (index) {
           setState(() {
@@ -55,14 +45,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: Column(
         children: [
 
-          // topbar with hamburger, title, search, username
           DashboardTopbar(
             pageTitle: pageTitles[selectedIndex],
-            scaffoldKey: scaffoldKey,
           ),
 
-          // page content
-          Expanded(child: getPage()),
+          // shows the page based on selected index
+          Expanded(child: pages[selectedIndex]),
 
         ],
       ),

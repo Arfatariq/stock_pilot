@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stock_pilot/screens/auth_screens/forget_password.dart';
-import 'package:stock_pilot/screens/auth_screens/signup_screen.dart';
+import 'package:stock_pilot/views/auth_screens/forget_password.dart';
+import 'package:stock_pilot/views/auth_screens/signup_screen.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/widgets/top_bar.dart';
 
@@ -13,14 +13,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   bool _obscurePassword = true;
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                
                   TextField(
-                    controller: _emailController,
+                    controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: 'you@company.com',
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   
                   TextField(
-                    controller: _passwordController,
+                    controller: passwordController,
                     obscureText: _obscurePassword,
                     decoration: InputDecoration(
                       hintText: '••••••••',

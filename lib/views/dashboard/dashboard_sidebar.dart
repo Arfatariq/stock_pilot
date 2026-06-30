@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 
-import 'package:stock_pilot/widgets/sidebar_items.dart';
+import 'package:stock_pilot/widgets/side_drawer_items.dart';
 import 'package:stock_pilot/widgets/top_bar.dart';
 
 class DashboardSidebar extends StatelessWidget {
@@ -58,7 +58,7 @@ class DashboardSidebar extends StatelessWidget {
             Divider(color: Colors.white.withOpacity(0.1), height: 1),
             const SizedBox(height: 10),
 
-            SidebarItem(
+            SidedrawerItem(
               icon: Icons.dashboard_outlined,
               title: 'Dashboard',
               selected: selectedIndex == 0,
@@ -67,7 +67,7 @@ class DashboardSidebar extends StatelessWidget {
                 Navigator.pop(context); // close drawer
               },
             ),
-            SidebarItem(
+            SidedrawerItem(
               icon: Icons.inventory_2_outlined,
               title: 'Products',
               selected: selectedIndex == 1,
@@ -76,7 +76,7 @@ class DashboardSidebar extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            SidebarItem(
+            SidedrawerItem(
               icon: Icons.store_outlined,
               title: 'Suppliers',
               selected: selectedIndex == 2,
@@ -85,7 +85,7 @@ class DashboardSidebar extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            SidebarItem(
+            SidedrawerItem(
               icon: Icons.shopping_cart_outlined,
               title: 'Purchases',
               selected: selectedIndex == 3,
@@ -94,7 +94,7 @@ class DashboardSidebar extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            SidebarItem(
+            SidedrawerItem(
               icon: Icons.warehouse_outlined,
               title: 'Inventory',
               selected: selectedIndex == 4,

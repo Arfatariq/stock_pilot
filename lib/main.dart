@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stock_pilot/screens/splash/splash_screen.dart';
+import 'package:stock_pilot/views/splash/splash_screen.dart';
 
 
 void main() {

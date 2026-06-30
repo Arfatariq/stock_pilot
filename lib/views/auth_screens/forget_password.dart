@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stock_pilot/screens/auth_screens/signup_screen.dart';
+import 'package:stock_pilot/views/auth_screens/signup_screen.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/widgets/top_bar.dart';
 

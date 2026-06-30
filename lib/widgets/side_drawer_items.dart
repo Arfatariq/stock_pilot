@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 
-class SidebarItem extends StatelessWidget {
+class SidedrawerItem extends StatelessWidget {
   final IconData icon;
   final String title;
   final bool selected;
   final VoidCallback onTap;
 
-  const SidebarItem({
+  const SidedrawerItem({
     super.key,
     required this.icon,
     required this.title,

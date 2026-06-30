@@ -3,12 +3,10 @@ import 'package:stock_pilot/theme/app_colors.dart';
 
 class DashboardTopbar extends StatelessWidget {
   final String pageTitle;
-  final GlobalKey<ScaffoldState> scaffoldKey;
 
   const DashboardTopbar({
     super.key,
     required this.pageTitle,
-    required this.scaffoldKey,
   });
 
   @override
@@ -19,10 +17,10 @@ class DashboardTopbar extends StatelessWidget {
       child: Row(
         children: [
 
-          // hamburger button to open drawer
+          // hamburger — opens drawer automatically
           GestureDetector(
             onTap: () {
-              scaffoldKey.currentState!.openDrawer();
+              Scaffold.of(context).openDrawer();
             },
             child: const Icon(
               Icons.menu,

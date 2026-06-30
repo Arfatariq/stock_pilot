@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:stock_pilot/screens/dashboard/dashboard_screen.dart';
+import 'package:stock_pilot/views/dashboard/dashboard_screen.dart';
 
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/widgets/app_logo.dart';
