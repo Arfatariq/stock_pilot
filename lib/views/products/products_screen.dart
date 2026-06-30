@@ -12,25 +12,25 @@ class ProductsScreen extends StatelessWidget {
   final List<Map<String, dynamic>> products = const [
     {
       'name': 'USB-C Hub 7-in-1',
-      'supplier': 'TechParts Ltd',
+   
       'price': 'Rs. 2,400',
       'stock': 3,
     },
     {
       'name': 'Wireless Mouse Pro',
-      'supplier': 'Apex Supplies',
+   
       'price': 'Rs. 1,850',
       'stock': 7,
     },
     {
       'name': 'Mechanical Keyboard TKL',
-      'supplier': 'GlobalStock',
+  
       'price': 'Rs. 5,200',
       'stock': 54,
     },
     {
       'name': 'Monitor 24" FHD',
-      'supplier': 'TechParts Ltd',
+   
       'price': 'Rs. 28,000',
       'stock': 31,
     },
@@ -78,7 +78,8 @@ class ProductsScreen extends StatelessWidget {
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 10),
                 itemBuilder: (context, index) {
-                  return ProductCard(products: products[index], product: {},);
+                  return ProductCard(product: products[index],);
+                
                 },
               ),
             ),

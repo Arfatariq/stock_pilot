@@ -1,53 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:stock_pilot/theme/app_colors.dart';
 
 class ProductCard extends StatelessWidget {
-    final Map<String, dynamic> product;
-  const ProductCard({super.key, required this.product, required Map<String, dynamic> products});
+  final Map<String, dynamic> product;
+
+  const ProductCard({
+  super.key,
+  required this.product,
+});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.white
-        ),
-        child: Row(
-          children: [
-            Container(
-              height:50,
-              width: 50,
-              decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white
-        ),
-        child: Icon(Icons.inventory_rounded,
-        color: Colors.blueAccent,
-        ),
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Row(
+        children: [
+
+          // product image placeholder
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: AppColors.primaryLight,
+              borderRadius: BorderRadius.circular(8),
             ),
+            child: Icon(
+              Icons.inventory_2_outlined,
+              size: 22,
+              color: AppColors.primary,
+            ),
+          ),
+
+          const SizedBox(width: 12),
+
+          // product name, supplier, price
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  product['Name']
+                  product['name'] ?? '',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.primaryDark,
                   ),
-                  Text(
-                    product['price']
-                  )
+                ),
+                const SizedBox(height: 3),
+               
+               
+                Text(
+                  product['price'] ?? '',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.primary,
+                  ),
+                ),
               ],
             ),
           ),
+
+          // stock count
           Text(
-            '${product['stock']} units',
+            '${product['stock'] ?? 0} units',
             style: TextStyle(
               fontSize: 12,
               color: Colors.grey.shade500,
             ),
           ),
-          ],
-          
-        ),
+
+        ],
       ),
     );
   }
