@@ -36,11 +36,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
     super.dispose();
   }
 
-  // pick image from gallery
+ 
   Future<void> pickImage() async {
     final picked = await imagepicker.pickImage(
       source: ImageSource.gallery,
-      imageQuality: 70, // compress a bit to save storage
+      imageQuality: 70, 
     );
 
     if (picked != null) {
@@ -73,14 +73,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
             const SizedBox(height: 8),
 
-            // image upload box
+       
             const Text(
               'Product image',
               style: TextStyle(fontSize: 13, color: Colors.black54),
             ),
             const SizedBox(height: 8),
 
-            // shows selected image or upload placeholder
+           
             Obx(() {
               final image = productcontroller.selectedimage.value;
               return GestureDetector(
@@ -156,7 +156,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
             const SizedBox(height: 16),
 
-            // description
+         
             const Text(
               'Description',
               style: TextStyle(fontSize: 13, color: Colors.black54),
@@ -185,7 +185,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
             const SizedBox(height: 16),
 
-            // price and stock side by side
             Row(
               children: [
 

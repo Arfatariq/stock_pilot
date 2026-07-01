@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/widgets/side_drawer_items.dart';
+import 'package:stock_pilot/widgets/top_bar.dart';
 
 
 class AppSidedrawer extends StatelessWidget {
@@ -22,37 +23,38 @@ class AppSidedrawer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            TopBar(),
 
             // logo row
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
-              child: Row(
-                children: [
-                  Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(
-                      Icons.grid_view_rounded,
-                      size: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  const Text(
-                    'StockPilot',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
+            //   child: Row(
+            //     children: [
+            //       Container(
+            //         width: 32,
+            //         height: 32,
+            //         decoration: BoxDecoration(
+            //           color: AppColors.primary,
+            //           borderRadius: BorderRadius.circular(8),
+            //         ),
+            //         child: const Icon(
+            //           Icons.grid_view_rounded,
+            //           size: 18,
+            //           color: Colors.white,
+            //         ),
+            //       ),
+            //       const SizedBox(width: 10),
+            //       const Text(
+            //         'StockPilot',
+            //         style: TextStyle(
+            //           fontSize: 15,
+            //           fontWeight: FontWeight.w500,
+            //           color: Colors.white,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
 
             Divider(color: Colors.white.withOpacity(0.1), height: 1),
             const SizedBox(height: 10),

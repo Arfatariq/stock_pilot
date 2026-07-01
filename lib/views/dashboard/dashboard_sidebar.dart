@@ -73,7 +73,7 @@ class DashboardSidebar extends StatelessWidget {
             ),
             SidedrawerItem(
               icon: Icons.shopping_cart_outlined,
-              title: 'Purchases',
+              title: 'Orders',
               selected: selectedIndex == 3,
               onTap: () {
                 onItemTapped(3);

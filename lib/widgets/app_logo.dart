@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 
 
-class SplashScreenLogo extends StatelessWidget {
+class AppLogo extends StatelessWidget {
   final double size;
 
-  const SplashScreenLogo({super.key, this.size = 72});
+  AppLogo({super.key, this.size = 72});
 
   @override
   Widget build(BuildContext context) {

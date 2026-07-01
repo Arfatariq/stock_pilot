@@ -1,45 +1,44 @@
-class ProductModel {
+class OrderModel {
   final String id;
-  final String name;
+  final String productName;
   final String description;
   final double price;
-  final int stock;
+  final int quantity;
   final String supplier;
   final String? imageUrl;
   final String createdAt;
+  final String status;
 
-  ProductModel({
+  OrderModel({
     required this.id,
-    required this.name,
+    required this.productName,
     required this.description,
     required this.price,
-    required this.stock,
+    required this.quantity,
     required this.supplier,
     this.imageUrl,
-    required this.createdAt,
+    required this.createdAt, required this.status, required String productname, required String createdat,
   });
 
-  // convert supabase map response to ProductModel
-  factory ProductModel.fromMap(Map<String, dynamic> map) {
-    return ProductModel(
+  factory OrderModel.fromMap(Map<String, dynamic> map) {
+    return OrderModel(
       id: map['id'] ?? '',
-      name: map['name'] ?? '',
+      productName: map['product_name'] ?? '',
       description: map['description'] ?? '',
       price: (map['price'] ?? 0).toDouble(),
-      stock: map['stock'] ?? 0,
+      quantity: map['quantity'] ?? 0,
       supplier: map['supplier'] ?? '',
       imageUrl: map['image_url'],
-      createdAt: map['created_at'] ?? '',
+      createdAt: map['created_at'] ?? '', status: '', productname: '', createdat: '',
     );
   }
 
-  // convert ProductModel back to map — used when saving to supabase
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
+      'product_name': productName,
       'description': description,
       'price': price,
-      'stock': stock,
+      'quantity': quantity,
       'supplier': supplier,
       'image_url': imageUrl,
     };

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class DashboardTopbar extends StatelessWidget {
   final String pageTitle;
@@ -9,15 +10,39 @@ class DashboardTopbar extends StatelessWidget {
     required this.pageTitle,
   });
 
+  // get current logged in user name from supabase
+  String getUserName() {
+    final user = Supabase.instance.client.auth.currentUser;
+
+    // we saved name in user_metadata during signup
+    if (user != null && user.userMetadata != null) {
+      final name = user.userMetadata!['name'];
+      if (name != null && name.toString().isNotEmpty) {
+        return name.toString();
+      }
+    }
+
+    // fallback to email if name not found
+    return user?.email?.split('@').first ?? 'User';
+  }
+
+  // get first letter of name for avatar
+  String getInitial() {
+    final name = getUserName();
+    return name.isNotEmpty ? name[0].toUpperCase() : 'U';
+  }
+
   @override
   Widget build(BuildContext context) {
+    final username = getUserName();
+    final initial = getInitial();
+
     return Container(
       color: AppColors.primaryDark,
       padding: const EdgeInsets.fromLTRB(16, 48, 16, 14),
       child: Row(
         children: [
 
-          // hamburger — opens drawer automatically
           GestureDetector(
             onTap: () {
               Scaffold.of(context).openDrawer();
@@ -71,13 +96,12 @@ class DashboardTopbar extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(width: 14),
+          const SizedBox(width: 5),
 
-          // username and avatar
           Row(
             children: [
               Text(
-                'Arfa',
+                username,
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.white.withOpacity(0.8),
@@ -87,9 +111,9 @@ class DashboardTopbar extends StatelessWidget {
               CircleAvatar(
                 radius: 15,
                 backgroundColor: AppColors.primary,
-                child: const Text(
-                  'A',
-                  style: TextStyle(
+                child: Text(
+                  initial,
+                  style: const TextStyle(
                     fontSize: 13,
                     color: Colors.white,
                     fontWeight: FontWeight.w500,

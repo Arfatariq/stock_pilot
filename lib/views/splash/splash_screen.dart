@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             SplashScreenLogo(size: 72),
+              AppLogo(size: 72),
             const SizedBox(height: 22),
             const Text(
               'StockPilot',

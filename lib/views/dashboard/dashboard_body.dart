@@ -20,7 +20,7 @@ class DashboardBody extends StatelessWidget {
 
           // welcome text
           const Text(
-            'Welcome back 👋',
+            'Welcome back ',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,

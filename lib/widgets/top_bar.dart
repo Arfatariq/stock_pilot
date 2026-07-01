@@ -14,7 +14,7 @@ class TopBar extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 52, 20, 20),
       child: Row(
         children: [
-          const SplashScreenLogo(size: 30),
+           AppLogo(size: 30),
           const SizedBox(width: 10),
           const Text(
             'StockPilot',
