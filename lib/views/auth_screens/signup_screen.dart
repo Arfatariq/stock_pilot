@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stock_pilot/views/auth_screens/login_screen.dart';
+import 'package:get/get.dart';
+import 'package:stock_pilot/services/auth_controller.dart';
 
+import 'package:stock_pilot/views/auth_screens/login_screen.dart';
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/widgets/top_bar.dart';
 
@@ -16,7 +18,10 @@ class _SignupScreenState extends State<SignupScreen> {
   final namecontroller = TextEditingController();
   final phonenocontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
- bool _obscurePassword = true;
+  bool _obscurePassword = true;
+
+  // get the same controller that login screen already created
+  final authcontroller = Get.find<AuthController>();
 
   @override
   void dispose() {
@@ -211,32 +216,70 @@ class _SignupScreenState extends State<SignupScreen> {
 
                   const SizedBox(height: 28),
 
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                      
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                  // error message — only shows when there is an error
+                  Obx(() {
+                    if (authcontroller.errormessage.value.isEmpty) {
+                      return const SizedBox();
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 14),
+                      child: Text(
+                        authcontroller.errormessage.value,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFFA32D2D),
                         ),
                       ),
-                      child: const Text(
-                        'Create account',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
+                    );
+                  }),
+
+                  // create account button
+                  Obx(() {
+                    return SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: authcontroller.isloading.value
+                            ? null
+                            : () {
+                                authcontroller.signup(
+                                  namecontroller.text.trim(),
+                                  phonenocontroller.text.trim(),
+                                  emailcontroller.text.trim(),
+                                  passwordcontroller.text.trim(),
+                                );
+                              },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          padding:
+                              const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
+                        child: authcontroller.isloading.value
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : const Text(
+                                'Create account',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                       ),
-                    ),
-                  ),
+                    );
+                  }),
 
                   const SizedBox(height: 20),
 
+                  // already have account
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -247,12 +290,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                             Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>  LoginScreen(),
-      ),
-    );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                          );
                         },
                         child: const Text(
                           'Sign in',
