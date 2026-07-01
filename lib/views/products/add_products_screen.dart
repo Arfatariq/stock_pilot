@@ -1,4 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:stock_pilot/controllers/product_controlelr.dart';
+
 import 'package:stock_pilot/theme/app_colors.dart';
 
 class AddProductScreen extends StatefulWidget {
@@ -15,7 +20,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final stockcontroller = TextEditingController();
   final suppliercontroller = TextEditingController();
 
-  
+  // get the product controller
+  final productcontroller = Get.put(ProductController());
+
+  // image picker instance
+  final imagepicker = ImagePicker();
 
   @override
   void dispose() {
@@ -25,6 +34,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
     stockcontroller.dispose();
     suppliercontroller.dispose();
     super.dispose();
+  }
+
+  // pick image from gallery
+  Future<void> pickImage() async {
+    final picked = await imagepicker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 70, // compress a bit to save storage
+    );
+
+    if (picked != null) {
+      productcontroller.setImage(File(picked.path));
+    }
   }
 
   @override
@@ -58,38 +79,52 @@ class _AddProductScreenState extends State<AddProductScreen> {
               style: TextStyle(fontSize: 13, color: Colors.black54),
             ),
             const SizedBox(height: 8),
-            GestureDetector(
-              onTap: () {
-                // image picker logic later
-              },
-              child: Container(
-                width: double.infinity,
-                height: 120,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey.shade300),
+
+            // shows selected image or upload placeholder
+            Obx(() {
+              final image = productcontroller.selectedimage.value;
+              return GestureDetector(
+                onTap: pickImage,
+                child: Container(
+                  width: double.infinity,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade50,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey.shade300),
+                  ),
+                  child: image != null
+                      // show selected image
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.file(
+                            image,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          ),
+                        )
+                      // show upload placeholder
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.add_photo_alternate_outlined,
+                              size: 32,
+                              color: Colors.grey.shade400,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Tap to upload image',
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.grey.shade400,
+                              ),
+                            ),
+                          ],
+                        ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add_photo_alternate_outlined,
-                      size: 32,
-                      color: Colors.grey.shade400,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Tap to upload image',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey.shade400,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+              );
+            }),
 
             const SizedBox(height: 20),
 
@@ -231,58 +266,77 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
             const SizedBox(height: 16),
 
-            // supplier dropdown
-          // supplier
-const Text(
-  'Supplier',
-  style: TextStyle(fontSize: 13, color: Colors.black54),
-),
-const SizedBox(height: 6),
-TextField(
-  controller: suppliercontroller,
-  decoration: InputDecoration(
-    hintText: 'Enter supplier name',
-    hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 13),
-    contentPadding: const EdgeInsets.symmetric(
-        horizontal: 14, vertical: 14),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.grey.shade300),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(
-          color: AppColors.primary, width: 1.5),
-    ),
-  ),
-),
+            // supplier
+            const Text(
+              'Supplier',
+              style: TextStyle(fontSize: 13, color: Colors.black54),
+            ),
+            const SizedBox(height: 6),
+            TextField(
+              controller: suppliercontroller,
+              decoration: InputDecoration(
+                hintText: 'Enter supplier name',
+                hintStyle: TextStyle(
+                    color: Colors.grey.shade400, fontSize: 13),
+                contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 14, vertical: 14),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: Colors.grey.shade300),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                      color: AppColors.primary, width: 1.5),
+                ),
+              ),
+            ),
 
             const SizedBox(height: 32),
 
             // add product button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  // add product logic later
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            Obx(() {
+              return SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: productcontroller.isadding.value
+                      ? null
+                      : () {
+                          productcontroller.addProduct(
+                            name: namecontroller.text.trim(),
+                            description: descriptioncontroller.text.trim(),
+                            price: pricecontroller.text.trim(),
+                            stock: stockcontroller.text.trim(),
+                            supplier: suppliercontroller.text.trim(),
+                          );
+                        },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
+                  child: productcontroller.isadding.value
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : const Text(
+                          'Add product',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                 ),
-                child: const Text(
-                  'Add product',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
+              );
+            }),
 
             const SizedBox(height: 24),
 
