@@ -4,6 +4,7 @@ import 'package:stock_pilot/controllers/product_controlelr.dart';
 
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/views/products/add_products_screen.dart';
+import 'package:stock_pilot/widgets/filter_widget.dart';
 import 'package:stock_pilot/widgets/product_card.dart';
 import 'package:stock_pilot/widgets/search_bar.dart';
 
@@ -12,7 +13,6 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // get controller — creates it if not already created
     final productcontroller = Get.put(ProductController());
 
     return Scaffold(
@@ -35,16 +35,33 @@ class ProductsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            const AppSearchBar(hint: 'Search products...'),
+            AppSearchBar(
+              hint: 'Search products',
+              onchanged: (value) {
+                productcontroller.onSearch(value);
+              },
+            ),
 
-            const SizedBox(height: 14),
+            const SizedBox(height: 12),
 
-            // product count from controller
+          
             Obx(() {
-              return Text(
-                '${productcontroller.products.length} products',
-                style: TextStyle(
-                    fontSize: 12, color: AppColors.primaryMid),
+              return Row(
+                children: [
+
+                  Text(
+                    '${productcontroller.filteredproducts.length} products',
+                    style: TextStyle(
+                        fontSize: 12, color: AppColors.primaryMid),
+                  ),
+
+                  const SizedBox(width: 15),
+                  Flexible(child: FilterWidget(productcontroller: productcontroller)),
+
+                  // sort button
+                
+
+                ],
               );
             }),
 
@@ -54,7 +71,6 @@ class ProductsScreen extends StatelessWidget {
             Expanded(
               child: Obx(() {
 
-         
                 if (productcontroller.isloading.value) {
                   return const Center(
                     child: CircularProgressIndicator(
@@ -63,11 +79,12 @@ class ProductsScreen extends StatelessWidget {
                   );
                 }
 
-                // empty state
-                if (productcontroller.products.isEmpty) {
+                if (productcontroller.filteredproducts.isEmpty) {
                   return Center(
                     child: Text(
-                      'No products yet\nTap + to add one',
+                      productcontroller.searchquery.value.isNotEmpty
+                          ? 'No products match your search'
+                          : 'No products yet\nTap + to add one',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 13, color: Colors.grey.shade400),
@@ -75,17 +92,18 @@ class ProductsScreen extends StatelessWidget {
                   );
                 }
 
-                // products list with pull to refresh
                 return RefreshIndicator(
                   color: AppColors.primary,
                   onRefresh: () => productcontroller.fetchProducts(),
                   child: ListView.separated(
-                    itemCount: productcontroller.products.length,
+                    itemCount:
+                        productcontroller.filteredproducts.length,
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 10),
                     itemBuilder: (context, index) {
                       return ProductCard(
-                        product: productcontroller.products[index],
+                        product: productcontroller
+                            .filteredproducts[index],
                       );
                     },
                   ),
