@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:stock_pilot/views/auth_screens/login_screen.dart';
+import 'package:get/get.dart';
+
 import 'package:stock_pilot/theme/app_colors.dart';
 import 'package:stock_pilot/widgets/app_logo.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,17 +16,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(
-          builder: (context) =>LoginScreen(),
-        ),
-      );
-    });
+    _checkSession();
   }
+
+  Future<void> _checkSession() async {
+    // wait 2 seconds so splash shows
+    await Future.delayed(const Duration(seconds: 2));
+
+    final session = Supabase.instance.client.auth.currentSession;
+
+    if (session != null) {
+      // user already logged in
+      Get.offAllNamed('/dashboard');
+    } else {
+      // no session — go to login
+      Get.offAllNamed('/login');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SplashScreenLogo(size: 72),
+             SplashScreenLogo(size: 72),
             const SizedBox(height: 22),
             const Text(
               'StockPilot',
