@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class AppSearchBar extends StatelessWidget {
   final String hint;
+  final Function(String)? onchanged;
 
   const AppSearchBar({
     super.key,
     required this.hint,
+    this.onchanged,
   });
 
   @override
@@ -20,14 +22,13 @@ class AppSearchBar extends StatelessWidget {
       child: Row(
         children: [
 
-      
           Icon(Icons.search, size: 18, color: Colors.grey.shade400),
 
-     
+          const SizedBox(width: 8),
 
-       
           Expanded(
             child: TextField(
+              onChanged: onchanged,
               decoration: InputDecoration(
                 hintText: hint,
                 hintStyle: TextStyle(

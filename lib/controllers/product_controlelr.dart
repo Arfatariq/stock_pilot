@@ -7,12 +7,28 @@ import 'package:stock_pilot/services/product_services.dart';
 class ProductController extends GetxController {
   final productservice = ProductService();
 
-  // now a list of ProductModel instead of raw maps
-  var products = <ProductModel>[].obs;
+  // all products from supabase
+  var allproducts = <ProductModel>[].obs;
+
+  // filtered list that the screen shows
+  var filteredproducts = <ProductModel>[].obs;
 
   var isloading = false.obs;
   var isadding = false.obs;
   var selectedimage = Rxn<File>();
+
+  // search and filter state
+  var searchquery = ''.obs;
+  var selectedsort = 'Newest'.obs;
+
+  final List<String> sortoptions = [
+    'Newest',
+    'Oldest',
+    'Price: Low to High',
+    'Price: High to Low',
+    'Stock: Low to High',
+    'Stock: High to Low',
+  ];
 
   @override
   void onInit() {
@@ -24,11 +40,57 @@ class ProductController extends GetxController {
     isloading.value = true;
     try {
       final result = await productservice.getProducts();
-      products.value = result;
+      allproducts.value = result;
+      // apply filter after fetching
+      applyfilter();
     } catch (e) {
       print('fetch products error: $e');
     }
     isloading.value = false;
+  }
+
+  // called every time search or sort changes
+  void applyfilter() {
+    var result = allproducts.toList();
+
+    // apply search
+    if (searchquery.value.isNotEmpty) {
+      result = result.where((p) {
+        final name = p.name.toLowerCase();
+        final supplier = p.supplier.toLowerCase();
+        final query = searchquery.value.toLowerCase();
+        return name.contains(query) || supplier.contains(query);
+      }).toList();
+    }
+
+    // apply sort
+    if (selectedsort.value == 'Newest') {
+      result.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    } else if (selectedsort.value == 'Oldest') {
+      result.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+    } else if (selectedsort.value == 'Price: Low to High') {
+      result.sort((a, b) => a.price.compareTo(b.price));
+    } else if (selectedsort.value == 'Price: High to Low') {
+      result.sort((a, b) => b.price.compareTo(a.price));
+    } else if (selectedsort.value == 'Stock: Low to High') {
+      result.sort((a, b) => a.stock.compareTo(b.stock));
+    } else if (selectedsort.value == 'Stock: High to Low') {
+      result.sort((a, b) => b.stock.compareTo(a.stock));
+    }
+
+    filteredproducts.value = result;
+  }
+
+  // called when user types in search bar
+  void onSearch(String query) {
+    searchquery.value = query;
+    applyfilter();
+  }
+
+  // called when user picks a sort option
+  void onSort(String sort) {
+    selectedsort.value = sort;
+    applyfilter();
   }
 
   void setImage(File image) {
@@ -54,10 +116,10 @@ class ProductController extends GetxController {
       String? imageurl;
 
       if (selectedimage.value != null) {
-        imageurl = await productservice.uploadImage(selectedimage.value!);
+        imageurl =
+            await productservice.uploadImage(selectedimage.value!);
       }
 
-      // create a ProductModel
       final product = ProductModel(
         id: '',
         name: name,
@@ -66,12 +128,10 @@ class ProductController extends GetxController {
         stock: int.tryParse(stock) ?? 0,
         supplier: supplier,
         imageUrl: imageurl,
-        createdAt: '',
+         createdAt: '',
       );
 
-      // pass the model to service
       await productservice.addProduct(product);
-
       await fetchProducts();
       selectedimage.value = null;
       Get.back();
